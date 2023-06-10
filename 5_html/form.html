@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Tugas 2 HTML</title>
+</head>
+
+<body>
+    <form action="./welcome.html">
+        <label for="fname">First name:</label><br>
+        <input type="text" id="fname" name="fname"><br>
+        <label for="lname">Last name:</label><br>
+        <input type="text" id="lname" name="lname">
+        <p>Gender:</p>
+
+        <input type="radio" id="male" name="fav_language" value="male">
+        <label for="male">MALE</label><br>
+        <input type="radio" id="female" name="fav_language" value="female">
+        <label for="female">FEMALE</label><br>
+        <input type="radio" id="other" name="fav_language" value="other">
+        <label for="other">OTHER</label>
+        <br />
+        <br />
+        <label for="bhs">Nasionality:</label>
+        <select id="bhs" name="bhs">
+            <option value="indonesia">Indonesia</option>
+
+        </select>
+        <p>Language Spoken:</p>
+
+        <input type="checkbox" id="bahasaindonesia" name="bahasaindonesia" value="bahasaindonesia">
+        <label for="bahasaindonesia"> Bahasa Indonesia</label><br>
+        <input type="checkbox" id="english" name="english" value="english">
+        <label for="english">English</label><br>
+        <input type="checkbox" id="other" name="other" value="Boat">
+        <label for="other">Other</label>
+        <br />
+        <br />
+        <p>Bio</p>
+        <textarea name="comment" form="usrform">Enter text here...</textarea>
+        <br />
+        <input type="submit" value="Submit">
+    </form>
+</body>
+
+</html>
