@@ -1,0 +1,11 @@
+2.Jawba soal berikut
+a.Jelaskan kenapa baris 21,22,23 tidak dapat tampil?
+b. Jelaskan  Kenapa deklarasi pada baris 26 menyebabkan error?
+c.Dengan melakukan komen pada baris ke 26, apakah baris 28 dapat di ekseskusi?
+
+
+jawaban
+a. karena let terdaftar = false;
+b. karena const nama adalah variable yg tidak bisa dirubah karena konstant.
+c. variabel asal dideklarasikan di dalam block function 'perkenalan' dan variabel tersebut hanya dapat diakses di dalam 
+     block function perkenalan saja
