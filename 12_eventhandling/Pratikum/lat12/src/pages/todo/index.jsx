@@ -1,16 +1,22 @@
-import React, { useState } from 'react';
+import React, { Component } from 'react';
 import './TodoList.css';
 
-const TodoList = () => {
-  const [todoList, setTodoList] = useState([]);
-  const [newTodo, setNewTodo] = useState('');
+class TodoList extends Component {
+  constructor(props) {
+    super(props);
+    this.state = {
+      todoList: [],
+      newTodo: ''
+    };
+  }
 
-  const handleInputChange = (e) => {
-    setNewTodo(e.target.value);
+  handleInputChange = (e) => {
+    this.setState({ newTodo: e.target.value });
   };
 
-  const handleAddTodo = (e) => {
+  handleAddTodo = (e) => {
     if (e.key === 'Enter') {
+      const { newTodo, todoList } = this.state;
       if (newTodo.trim() !== '') {
         const newTodoItem = {
           id: Date.now(),
@@ -18,15 +24,18 @@ const TodoList = () => {
           completed: false
         };
 
-        setTodoList([...todoList, newTodoItem]);
-        setNewTodo('');
+        this.setState({
+          todoList: [...todoList, newTodoItem],
+          newTodo: ''
+        });
       } else {
         alert('Anda harus mengisi inputan terlebih dahulu');
       }
     }
   };
 
-  const handleToggleComplete = (id) => {
+  handleToggleComplete = (id) => {
+    const { todoList } = this.state;
     const updatedTodoList = todoList.map(todo => {
       if (todo.id === id) {
         return { ...todo, completed: !todo.completed };
@@ -34,53 +43,75 @@ const TodoList = () => {
       return todo;
     });
 
-    setTodoList(updatedTodoList);
+    this.setState({ todoList: updatedTodoList });
   };
 
-  const handleDeleteTodo = (id) => {
+  handleDeleteTodo = (id) => {
+    const { todoList } = this.state;
     const updatedTodoList = todoList.filter(todo => todo.id !== id);
-    setTodoList(updatedTodoList);
+    this.setState({ todoList: updatedTodoList });
   };
 
-  return (
-    <div className="todo-container">
-      <div className="input-container">
-        <label htmlFor="newTodo" className="input-label">
-          Tambahkan pekerjaan
-        </label>
-        <div className="input-wrapper">
-          <input
-            type="text"
-            id="newTodo"
-            className="input-field"
-            placeholder="Silahkan masukkan & enter..."
-            value={newTodo}
-            onChange={handleInputChange}
-            onKeyPress={handleAddTodo}
-          />
-          <div className="input-highlight" />
-          <div className="input-bar" />
+  componentDidMount() {
+    // Jalankan alur aplikasi di sini
+    console.log('Aplikasi telah dimuat');
+  }
+
+  componentDidUpdate(prevProps, prevState) {
+    // Jalankan alur aplikasi di sini saat state berubah
+    if (prevState.todoList !== this.state.todoList) {
+      console.log('Daftar pekerjaan diperbarui');
+    }
+  }
+
+  componentWillUnmount() {
+    // Bersihkan atau hentikan alur aplikasi di sini
+    console.log('Aplikasi akan ditutup');
+  }
+
+  render() {
+    const { todoList, newTodo } = this.state;
+
+    return (
+      <div className="todo-container">
+        <div className="input-container">
+          <label htmlFor="newTodo" className="input-label">
+            Tambahkan pekerjaan
+          </label>
+          <div className="input-wrapper">
+            <input
+              type="text"
+              id="newTodo"
+              className="input-field"
+              placeholder="Silahkan masukkan & enter..."
+              value={newTodo}
+              onChange={this.handleInputChange}
+              onKeyPress={this.handleAddTodo}
+            />
+            <div className="input-highlight" />
+            <div className="input-bar" />
+          </div>
+        </div>
+        <div className="todo-list">
+          {todoList.length > 0 ? (
+            todoList.map(todo => (
+              <div className="todo-item" key={todo.id}>
+                <input
+                  type="checkbox"
+                  checked={todo.completed}
+                  onChange={() => this.handleToggleComplete(todo.id)}
+                />
+                <span className={todo.completed ? 'completed' : ''}>{todo.title}</span>
+                <button onClick={() => this.handleDeleteTodo(todo.id)}>Hapus</button>
+              </div>
+            ))
+          ) : (
+            <p>Tidak ada pekerjaan dalam daftar</p>
+          )}
         </div>
       </div>
-      <div className="todo-list">
-        {todoList.length > 0 ? (
-          todoList.map(todo => (
-            <div className="todo-item" key={todo.id}>
-              <input
-                type="checkbox"
-                checked={todo.completed}
-                onChange={() => handleToggleComplete(todo.id)}
-              />
-              <span className={todo.completed ? 'completed' : ''}>{todo.title}</span>
-              <button onClick={() => handleDeleteTodo(todo.id)}>Hapus</button>
-            </div>
-          ))
-        ) : (
-          <p>Tidak ada pekerjaan dalam daftar</p>
-        )}
-      </div>
-    </div>
-  );
-};
+    );
+  }
+}
 
 export default TodoList;
