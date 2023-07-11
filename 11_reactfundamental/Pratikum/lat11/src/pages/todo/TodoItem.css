@@ -1,0 +1,21 @@
+.todo-item {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 10px;
+    background-color: #f5f5f5;
+    border-radius: 4px;
+    margin-bottom: 10px;
+    font-family: Arial, sans-serif;
+    font-size: 16px;
+  }
+  
+  .todo-item span {
+    flex: 1;
+    margin-right: 10px;
+  }
+  
+  .todo-item span:last-child {
+    margin-right: 0;
+  }
+  
