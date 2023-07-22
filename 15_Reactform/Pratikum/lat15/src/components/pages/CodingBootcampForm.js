@@ -14,7 +14,8 @@ const baseData = {
 const baseError = {
     nama: '',
     email: '',
-    noHandphone: ''
+    noHandphone: '',
+    kelas: '',
 };
 
 const CodingBootcampForm = () => {
@@ -43,6 +44,13 @@ const CodingBootcampForm = () => {
         } else {
             setErrorMessages(errors);
         }
+    };
+
+    const handleReset = () => {
+        // Reset the form input and error messages on "Reset" button click
+        setData(baseData);
+        setErrorMessages(baseError);
+        suratKesungguhan.current.value = ''; // Reset file input value
     };
 
     const validateForm = (formData) => {
@@ -81,7 +89,7 @@ const CodingBootcampForm = () => {
         <div className="container">
             <div className="row justify-content-center">
                 <div className="col-6 col-md-6 mt-4">
-                    <form onSubmit={handleSubmit}>
+                    <form onSubmit={handleSubmit} onReset={handleReset}>
                         <FormInput
                             label="Nama Lengkap:"
                             type="text"
